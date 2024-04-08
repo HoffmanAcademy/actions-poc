@@ -13,7 +13,7 @@ permissions:
 
 jobs:
   Install_Test_Lint:
-    name: TypeScript Tests
+    name: Install, Test and Lint
     runs-on: ubuntu-latest
 
     steps:
@@ -36,9 +36,9 @@ jobs:
         id: npm-format-check
         run: npm run format:check
 
-    #   - name: Lint
-    #     id: npm-lint
-    #     run: npm run lint
+      #   - name: Lint
+      #     id: npm-lint
+      #     run: npm run lint
 
       - name: Test
         id: npm-ci-test
@@ -48,6 +48,6 @@ jobs:
     needs: Install_Test_Lint
     runs-on: ubuntu-latest
     steps:
-        - name: Build Code
-          id: build-code
-          run: npm run build
+      - name: Build Code
+        id: build-code
+        run: npm run build
