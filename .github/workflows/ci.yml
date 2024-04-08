@@ -45,6 +45,7 @@ jobs:
         run: npm run test
   Build:
     name: Build
+    needs: Install_Test_Lint
     runs-on: ubuntu-latest
     steps:
         - name: Build Code
