@@ -1,10 +1,8 @@
-## Setup
+### Running Locally
+- `npm install`
+- `npm run build`
+- `npm run start` or `npm run dev` to use nodemon
 
-1. Run `docker-compose build`. This will pull the base images, and install image dependencies.
-
-2. Run `docker-compose run web npm install`. This will install the `package.json` dependencies in the `app` sub-folder. Since this folder is mounted into the Docker image as a volume, any changes made in the image or on your local file system are synced.
-3. Run `docker-compose run web npm run build`
-
-## Start
-
-Run `docker-compose up` to start the container. The app should then be running at http://localhost:3030
+### Running in Docker
+- `docker-compose build`. This will pull the base images, and install image dependencies
+- `docker-compose up` to start the container. The app should then be running at http://localhost:3030

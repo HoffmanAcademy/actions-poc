@@ -1,15 +1,15 @@
-ARG IMAGE_VERSION_BUILD=latest
-ARG IMAGE_VERSION=18.14.2-bullseye-slim
-ARG NODE_ENV=development
+FROM node:18-alpine as base
 
-FROM node:${IMAGE_VERSION_BUILD} AS build
-RUN apt-get update && apt-get install -y --no-install-recommends dumb-init
+WORKDIR /home/node/app
 
-FROM node:${IMAGE_VERSION}
-ENV NODE_ENV ${NODE_ENV}
-COPY --from=build /usr/bin/dumb-init /usr/bin/dumb-init
-RUN mkdir /usr/src/app
-RUN chown node:node /usr/src/app
-WORKDIR /usr/src/app
-USER node
-CMD ["dumb-init", "npm", "run", "build"]
+COPY package.json ./
+
+RUN npm i
+
+COPY . .
+
+FROM base as production
+
+ENV NODE_PATH=./build
+
+RUN npm run build
