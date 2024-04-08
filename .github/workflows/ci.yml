@@ -27,18 +27,12 @@ jobs:
         with:
           node-version-file: .nvmrc
           cache: npm
-
       - name: Install Dependencies
         id: npm-ci
         run: npm ci
-
       - name: Check Format
         id: npm-format-check
         run: npm run format:check
-
-      #   - name: Lint
-      #     id: npm-lint
-      #     run: npm run lint
 
       - name: Test
         id: npm-ci-test
@@ -48,6 +42,21 @@ jobs:
     needs: Install_Test_Lint
     runs-on: ubuntu-latest
     steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install Dependencies
+        id: npm-ci
+        run: npm ci
+
       - name: Build Code
         id: build-code
         run: npm run build
