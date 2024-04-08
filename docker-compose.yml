@@ -7,6 +7,6 @@ services:
     environment:
       - APP_PORT=${APP_PORT:-3030}
     volumes:
-      - "./app:/usr/src/app"
+      - "./:/usr/src/app"
     ports:
       - "3030:3030"

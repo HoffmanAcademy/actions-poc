@@ -4,4 +4,6 @@
  * @param {number} b 
  * @returns {number}
  */
-module.exports = (a, b) => a + b
+export const sum = (a: number, b: number): number => {
+    return a + b;
+}
