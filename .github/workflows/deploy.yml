@@ -1,0 +1,23 @@
+name: Deployment
+on:
+  workflow_dispatch:
+
+jobs:
+  deploy-dev:
+    runs-on: ubuntu-latest
+    environment: Dev
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+
+      - name: deploy to dev
+        run: echo "deploying to dev"
+  deploy-prod:
+    runs-on: ububtu-latest
+    environment: Prod
+    needs: deploy-dev
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: deploy to prod
+        run: echo "deploying to prod"
