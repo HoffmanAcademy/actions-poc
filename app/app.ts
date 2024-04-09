@@ -7,7 +7,7 @@ app.use(cors());
 const port = process.env.APP_PORT || 3030;
 
 app.get('/', (req: Request, res: Response) => {
-  res.send(JSON.stringif({ message: 'Hello World!' }));
+  res.send(JSON.stringify({ message: 'Hello World!' }));
 });
 
 app.listen(port, () => {
