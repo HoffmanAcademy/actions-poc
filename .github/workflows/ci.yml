@@ -1,0 +1,62 @@
+name: CI/CD
+
+on:
+  pull_request:
+    branches:
+      - main
+  push:
+    branches:
+      - main
+
+permissions:
+  contents: read
+
+jobs:
+  Install_Test_Lint:
+    name: Install, Test and Lint
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+      - name: Install Dependencies
+        id: npm-ci
+        run: npm ci
+      - name: Check Format
+        id: npm-format-check
+        run: npm run format:check
+
+      - name: Test
+        id: npm-ci-test
+        run: npm run test
+  Build:
+    name: Build
+    needs: Install_Test_Lint
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        id: checkout
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        id: setup-node
+        uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - name: Install Dependencies
+        id: npm-ci
+        run: npm ci
+
+      - name: Build Code
+        id: build-code
+        run: npm run build
