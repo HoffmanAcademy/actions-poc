@@ -10,6 +10,10 @@ app.get('/', (req: Request, res: Response) => {
   res.send(JSON.stringify({ message: 'Hello World!!!!!' }));
 });
 
+app.get('/greeting', (req: Request, res: Response) => {
+  res.send('<h2>greetings!</h2>');
+});
+
 app.listen(port, () => {
   console.log(`[server]: Server is running at http://localhost:${port}`);
 });
