@@ -1,0 +1,51 @@
+name: Deploy Sandbox
+on:
+  workflow_dispatch:
+env:
+  AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+  AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+  REGION: ${{ vars.REGION }}
+  ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+  ACCOUNT: ${{ secrets.ACCOUNT_ID }}
+
+jobs:
+  cdk-synth:
+    runs-on: ubuntu-latest
+    environment: sandbox
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+
+      - name: cdk synth
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          cdk_subcommand: 'synth'
+          cdk_version: '2.136.0'
+          working_dir: './'
+        env:
+          AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          REGION: ${{ vars.REGION }}
+          AWS_DEFAULT_REGION: ${{ vars.REGION }}
+          ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
+          ACCOUNT: ${{ secrets.ACCOUNT_ID }}
+  deploy-sandbox:
+    needs: cdk-synth
+    environment: sandbox
+    runs-on: ubuntu-latest
+    steps:
+      - name: checkout repo
+        uses: actions/checkout@v4
+      - name: deploy to sandbox
+        uses: youyo/aws-cdk-github-actions@v2
+        with:
+          cdk_subcommand: 'deploy'
+          cdk_stack: 'ActionsPOCStack'
+          actions_comment: false
+        env:
+          AWS_ACCESS_KEY_ID: $AWS_ACCESS_KEY_ID
+          AWS_SECRET_ACCESS_KEY: $AWS_SECRET_ACCESS_KEY
+          REGION: $REGION
+          AWS_DEFAULT_REGION: $REGION
+          ACCOUNT_ID: $ACCOUNT_ID
+          ACCOUNT: $ACCOUNT_ID

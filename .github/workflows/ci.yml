@@ -42,7 +42,7 @@ jobs:
     needs: Install_Test_Lint
     runs-on: ubuntu-latest
     steps:
-      - name: Checkout
+      - name: checkout repo
         id: checkout
         uses: actions/checkout@v4
 
