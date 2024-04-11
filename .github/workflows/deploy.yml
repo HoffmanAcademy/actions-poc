@@ -48,7 +48,7 @@ jobs:
           ACCOUNT: ${{ secrets.ACCOUNT_ID }}
 
   deploy-prod:
-    runs-on: ububtu-latest
+    runs-on: ubuntu-latest
     environment: Prod
     needs: deploy-dev
     steps:
