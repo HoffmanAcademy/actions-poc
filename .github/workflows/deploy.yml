@@ -4,7 +4,7 @@ on:
 env:
   AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
   AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-  REGION: ${{ secrets.REGION }}
+  REGION: ${{ vars.REGION }}
   ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
   ACCOUNT: ${{ secrets.ACCOUNT_ID }}
 
@@ -25,8 +25,8 @@ jobs:
         env:
           AWS_ACCESS_KEY_ID: ${{ secrets.AWS_ACCESS_KEY_ID }}
           AWS_SECRET_ACCESS_KEY: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
-          REGION: ${{ secrets.REGION }}
-          AWS_DEFAULT_REGION: ${{ secrets.REGION }}
+          REGION: ${{ vars.REGION }}
+          AWS_DEFAULT_REGION: ${{ vars.REGION }}
           ACCOUNT_ID: ${{ secrets.ACCOUNT_ID }}
           ACCOUNT: ${{ secrets.ACCOUNT_ID }}
 
