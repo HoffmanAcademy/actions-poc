@@ -1,10 +1,10 @@
-FROM node:18-alpine as base
+FROM --platform=linux/amd64 node:18-alpine as base
 
 WORKDIR /home/node/app
 
-COPY package.json ./
+COPY package.json package-lock.json ./
 
-RUN npm i
+RUN npm ci
 
 COPY . .
 
@@ -13,3 +13,7 @@ FROM base as production
 ENV NODE_PATH=./build
 
 RUN npm run build
+
+EXPOSE 3030
+
+CMD [ "npm", "run", "start" ]

@@ -1,3 +1,14 @@
 node_modules
 coverage
 dist
+# CDK asset staging directory
+.cdk.staging
+cdk.out
+
+# Parcel build directories
+.cache
+.build
+
+# Local env files
+.env*
+cdk.context.json
