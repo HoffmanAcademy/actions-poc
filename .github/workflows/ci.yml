@@ -32,7 +32,7 @@ jobs:
         run: npm ci
       - name: Check Format
         id: npm-format-check
-        run: npm run format:check
+        run: npm run format:check1
 
       - name: Test
         id: npm-ci-test
